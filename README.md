@@ -12,23 +12,8 @@ HEP3/EEP functionality support is provided by nodejs module [HEP-js](https://www
 
 For more information about HEP and SIPCAPTURE Projects, please visit [http://sipcapture.org](http://sipcapture.org)
 
-### Requirements:
-```
-	npm install cap
-	npm install sipcore
-	npm install hep-js
-	npm install elasticsearch
-```
-
 ### Example Usage:
-
-	HEP3: 
-		nodejs captagent-es.js -s 127.0.0.1 -p 9063 -i 2001 -P myHep
 	ES:   
-		nodejs captagent-es.js -debug true -ES 'https://test.facetflow.io:443' -t 15
+		captagent-js-linux -debug true -ES 'http://localhost:9200' -t 15
 
-### Daemonize process:
-
-	npm install forever -g
-	forever start captagent.js
 

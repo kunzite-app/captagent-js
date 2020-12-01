@@ -1,30 +1,11 @@
-/* 
- *	NODEJS Captagent w/ HEP3 Support via HEP-js module
- *	(C) 2015 L. Mangani, QXIP BV
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software Foundation,
- * Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- *
 
-		nodejs elasticapture.js -debug true -ES 'https://test.facetflow.io:443' -t 15
-
- Daemonize using forever:
-
-	npm install forever -g
-	forever start elasticapture.js
-
-*/ 
+const SIP = require('sipcore')
+const { Cap, decoders } = require('cap')
+const PROTOCOL = decoders.PROTOCOL;
+const HEPjs = require('hep-js');
+const ElasticQueue = require('elastic-queue');
+const dgram = require('dgram');
+const socket = dgram.createSocket("udp4");
 
 var version = 'v0.3';
 var debug = false;
@@ -116,22 +97,13 @@ if(process.argv.indexOf("-h") != -1){
 
 console.log('Starting JSAgent '+version);
 
-/********* NODE.JS Requirements ******/
-
-var SIP = require('sipcore');
-var Cap = require('cap').Cap,
-    decoders = require('cap').decoders,
-    PROTOCOL = decoders.PROTOCOL;
-
-var HEPjs = require('hep-js');
 
 /*********** Elastic Queue ***********/
 if (es_on) { 
 
 	if (es_user.length > 1) { es_url = es_url.replace('://', '://'+es_user+'@'); }
 
-	var ElasticQueue, Queue;
-	var ElasticQueue = require('elastic-queue');
+	var Queue;
 	
 	Queue = new ElasticQueue({
 		elasticsearch: { client: { host: es_url } },
@@ -155,14 +127,8 @@ if (es_on) {
 	  	// Queue.close();
 	  	// return process.exit();
 	});
-	
 }
 
-
-/*********** HEP OUT SOCKET ************/ 
-
-var dgram = require('dgram');
-var socket = dgram.createSocket("udp4");
 
 /*********** CAPTURE SOCKET ************/
 

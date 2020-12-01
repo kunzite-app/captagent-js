@@ -1,38 +1,38 @@
 {
   "name": "captagent-js",
   "version": "0.3.1",
-  "description": "HEP3 SIP Capture Agent for Node.JS",
-  "main": "captagent.js",
+  "description": "HEP3 SIP Capture Agent for ES",
+  "bin": "elasticapture.js",
+  "main": "elasticapture.js",
   "repository": {
     "type": "git",
-    "url": "http://github.com/sipcapture/captagent-js"
+    "url": "http://github.com/sostribe/captagent-js"
   },
-  "keywords": [
-    "hep",
-    "hep3",
-    "encapsulation",
-    "packet",
-    "pcap",
-    "homer",
-    "sipcapture",
-    "pcapture",
-    "sip",
-    "voip",
-    "captagent",
-    "monitoring"
-  ],
-  "author": "Lorenzo Mangani <lorenzo.mangani@gmail.com> (http://sipcapture.org/)",
-  "license": "GPLv2",
+  "keywords": [],
+  "author": "",
+  "license": "",
   "engines": {
     "node": ">= 0.10"
   },
   "bugs": {
-    "url": "https://github.com/sipcapture/captagent-js/issues"
+    "url": "https://github.com/sostribe/captagent-js/issues"
   },
   "dependencies": {
-    "cap": "*",
+    "cap": "^0.2.1",
+    "dgram": "^1.0.1",
+    "elastic-queue": "^0.3.0",
+    "hep-js": "github:sipcapture/hep-js",
     "sipcore": "*",
-    "hep-js": "sipcapture/hep-js"
     "elasticsearch": "*"
+  },
+  "devDependencies": {
+    "pkg": "^4.4.9"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx pkg --out-path=dist package.json"
+  },
+  "pkg": {
+    "scripts": "node_modules/elastic-queue/lib/handlers/**/*.js"
   }
 }
