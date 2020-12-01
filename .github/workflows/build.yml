@@ -12,6 +12,7 @@ jobs:
 
       - name: Build
         run: |
+          apt-get install libpcap0.8-dev
           npm install
           npm run build
 
